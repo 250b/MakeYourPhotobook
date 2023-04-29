@@ -3,23 +3,31 @@ import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
 import frame from '../images/frame.svg';
 import star from '../images/star.png'
+import Menu from "./Menu";
+import { useState } from "react";
 
 function Main() {
     let navigate = useNavigate();
-
+    const [showMenu, setShowMenu] = useState(false)
+    const toshowMenu = ()=>{
+        setShowMenu(true)
+    }
 
   return (
     <Container>
-        <Icon src={star}/>
-        <ContentContainer>
-        <Title>MAKE YOUR</Title>
-        <Frame src={frame}/>
-        <InputContainer>
-            <Input/>
-            <Button>GO!</Button>
-        </InputContainer>
-        <Title>PHOTOBOOK</Title>
-        </ContentContainer>
+        {showMenu?<Menu/>:""}
+        <MainContainer>
+            <Icon src={star} onClick={toshowMenu}/>
+            <ContentContainer>
+                <Title>MAKE YOUR</Title>
+                <Frame src={frame}/>
+                <InputContainer>
+                    <Input/>
+                    <Button>GO!</Button>
+                </InputContainer>
+                <Title>PHOTOBOOK</Title>
+            </ContentContainer>
+        </MainContainer>
     </Container>
   );
 }
@@ -31,7 +39,11 @@ const Container = styled.div`
   flex-direction:column;
   justify-content:center;
 `
-
+const MainContainer = styled.div`
+    z-index:1;
+    width:100vw;
+    position: absolute;
+`
 const ContentContainer = styled.div`
     @media Screen and (max-width:900px){
         width:100vw;
@@ -50,8 +62,6 @@ const Title = styled.div`
 const Icon = styled.img`
   width:60px;
   height:60px;
-  margin-left:auto;
-  margin-right:20px;
   margin-bottom:50px;
 `
 
