@@ -6,12 +6,16 @@ import star from '../images/star.png'
 function Menu() {
     let navigate = useNavigate();
 
+    const toMyAlbum =()=>{
+        navigate('/myalbum')
+    }
+
   return (
     <Container>
         <ContentContainer>
             <Icon src={star}/>
             <div>'s photobook</div>
-            <MenuList>My Album</MenuList>
+            <MenuList onClick={toMyAlbum}>My Album</MenuList>
             <MenuList>개인정보</MenuList>
             <MenuList>LOGOUT</MenuList>
         </ContentContainer>
@@ -45,13 +49,14 @@ const Icon = styled.img`
   margin-right:20px;
   margin-bottom:50px;
 `
-const MenuList = styled.div`
+const MenuList = styled.button`
     width:300px;
     height:80px;
     text-align:center;
     font-size:20px;
-    padding-top:50px;
+    font-family: goblin;
     border:1px solid black;
+    background-color:#00000000;
 `
 
 export default Menu;
