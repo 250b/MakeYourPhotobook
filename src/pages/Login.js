@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton"
-
+import { useNavigate } from "react-router-dom";
+ 
 function Login() {
+    let navigate = useNavigate();
+
+    const toMain =() =>{
+        navigate("/main")
+    };
   return (
     <Container>
       <LoginContainer>
@@ -10,7 +16,7 @@ function Login() {
         <Input></Input>
         <InputTitle>PW</InputTitle>
         <Input></Input>
-        <CustomButton text="YES!"/>
+        <CustomButton text="YES!" onclick={toMain}/>
       </LoginContainer>
       <Line/>
       <LoginContainer>
@@ -94,7 +100,7 @@ const Line = styled.div`
         border-left:0;
         height:0;
         width:calc(100vw - 80px);
-        margin-left:30px;
+        margin-left:40px;
     }
 `
 export default Login;
