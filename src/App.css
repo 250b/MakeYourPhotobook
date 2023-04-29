@@ -41,3 +41,8 @@
   font-family: "goblin";
   src: url("./fonts/Goblin_One/GoblinOne-Regular.ttf");
 }
+
+@font-face {
+  font-family: "gochi";
+  src: url("./fonts/Gochi_Hand/GochiHand-Regular.ttf");
+}

@@ -10,11 +10,11 @@ function MyAlbum() {
     <Container>
         <Title>MY ALBUM</Title>
         <AlbumContainer>
-            <Album><Polar><img src={polaroid}/><span>first</span></Polar></Album>
-            <Album><Polar><img src={polaroid}/><span>first</span></Polar></Album>
-            <Album><Polar><img src={polaroid}/><span>first</span></Polar></Album>
-            <Album><Polar><img src={polaroid}/><span>first</span></Polar></Album>
-            <Album><Polar><img src={polaroid}/><span>first</span></Polar></Album>
+            <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+            <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+            <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+            <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+            <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
         </AlbumContainer>
     </Container>
   );
@@ -71,17 +71,18 @@ const Polar = styled.div`
     }
   }
   >span{
+    font-family:gochi;
     position:absolute;
-    bottom:65px;
-    font-size:20px;
-    left:115px;
+    bottom:55px;
+    font-size:40px;
+    left:110px;
     @media Screen and (max-width:900px){
-        left:115px;
+        left:105px;
     }
     @media Screen and (max-width:600px){
-        font-size:15px;
-        bottom:20px;
-        left:65px;
+        font-size:25px;
+        bottom:15px;
+        left:63px;
     }
   }
 `
