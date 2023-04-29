@@ -25,19 +25,20 @@ function Menu() {
 
 const Container = styled.div`
   font-family: goblin;
+  width:100%;
   height:100vh;
-  width:100vw;
   display:flex;
   flex-direction:column;
   justify-content:center;
   background-color: #00000050;
   z-index:100;
-  position: relative;
+  position : fixed;
+  overflow : hidden;
 `
 const ContentContainer = styled.div`
     background-color:#00000090;
     width:300px;
-    height:100vh;
+    height:100%;
     margin-left:auto;
     border:1px solid black;
 `
