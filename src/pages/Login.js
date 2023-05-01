@@ -83,6 +83,7 @@ const Input = styled.input`
     border-radius:40px;
     padding:10px 15px;
     margin-bottom:30px;
+    border:2px solid black;
     @media Screen and (max-width:460px){
         width:calc(100vw - 100px);
     }
