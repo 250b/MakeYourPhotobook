@@ -13,10 +13,13 @@ function MyAlbum() {
     const toshowMenu = ()=>{
         setShowMenu(true)
     }
+    const tocloseMenu = ()=>{
+      setShowMenu(false)
+  }
 
   return (
     <Container>
-        {showMenu?<Menu/>:""}
+        {showMenu?<Menu onclick={tocloseMenu}/>:""}
         <MainContainer>
             <Icon src={star} onClick={toshowMenu}/>
             <Title>MY ALBUM</Title>
@@ -46,13 +49,19 @@ const MainContainer = styled.div`
     width:100vw;
     height:100vh;
     position: absolute;
+    margin-top:140px;
 `
 const Icon = styled.img`
   width:60px;
   height:60px;
   margin-left:auto;
-  margin-right:20px;
+  margin-right:30px;
   margin-top:20px;
+  position:absolute;
+  top:-70px;
+  right:0px;
+
+
   @media Screen and (max-width:600px){
     width:50px;
     height:50px;
