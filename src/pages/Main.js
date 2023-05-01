@@ -66,6 +66,10 @@ const Icon = styled.img`
   width:60px;
   height:60px;
   margin-bottom:50px;
+  position:absolute;
+  top:-80px;
+  right:30px;
+
 `
 
 const Frame = styled.img`
