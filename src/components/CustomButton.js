@@ -8,9 +8,9 @@ function CustomButton(props) {
   );
 }
 const Button = styled.button`
-  width:${(props)=>props.width}px; //250
+  width:${(props)=>props.width||250}px;
   font-family: goblin;
-  height:${(props)=>props.height}px; //50
+  height:${(props)=>props.height||50}px;
   background-color:#D9D9D9;
   font-size:25px;
   border-radius:40px;
