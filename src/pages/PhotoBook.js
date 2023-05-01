@@ -9,34 +9,41 @@ import { useLocation } from "react-router-dom";
 import theme1 from "../images/theme1.svg";
 import arrowLeft from '../images/arrow_left.svg';
 import arrowRight from '../images/arrow_right.svg';
+import Edit from "./Edit";
 
 function PhotoBook() {
     const location = useLocation();
     console.log(location);
     const albumName = location.state;
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false);
+    const [showEdit, setShowEdit] = useState(false)
+
     const toshowMenu = ()=>{
         setShowMenu(true)
     }
     const tocloseMenu = ()=>{
       setShowMenu(false)
   }
+  const toshowEdit=()=>{
+    setShowEdit(true)
+  }
 
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
+        {showEdit?<Edit/>:
         <MainContainer>
             <ButtonContainer>
-                <CustomButton text="edit" width='100' height="40"/>
+                <CustomButton text="edit" width='100' height="40" onclick={toshowEdit}/>
             </ButtonContainer>
             <Icon src={star} onClick={toshowMenu}/>
-            <Title>{albumName}</Title>
+            <Title>2023.04</Title>
             <ThemeContainer>
                 <Arrow src={arrowLeft}/>
                 <Theme src={theme1}/>
                 <Arrow src={arrowRight}/>
             </ThemeContainer>
-        </MainContainer>
+        </MainContainer>}
     </Container>
   );
 }
