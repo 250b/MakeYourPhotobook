@@ -12,10 +12,13 @@ function Main() {
     const toshowMenu = ()=>{
         setShowMenu(true)
     }
+    const tocloseMenu = ()=>{
+      setShowMenu(false)
+  }
 
   return (
     <Container>
-        {showMenu?<Menu/>:""}
+        {showMenu?<Menu onclick={tocloseMenu}/>:""}
         <MainContainer>
             <Icon src={star} onClick={toshowMenu}/>
             <ContentContainer>

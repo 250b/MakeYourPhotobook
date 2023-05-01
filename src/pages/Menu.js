@@ -3,7 +3,7 @@ import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
 import star from '../images/star.png'
 
-function Menu() {
+function Menu(props) {
     let navigate = useNavigate();
 
     const toMyAlbum =()=>{
@@ -13,7 +13,7 @@ function Menu() {
   return (
     <Container>
         <ContentContainer>
-            <Icon src={star}/>
+            <Icon src={star} onClick={props.onclick}/>
             <div>'s photobook</div>
             <MenuList onClick={toMyAlbum}>My Album</MenuList>
             <MenuList>개인정보</MenuList>
