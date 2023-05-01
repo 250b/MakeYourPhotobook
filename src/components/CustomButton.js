@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 function CustomButton(props) {
+  console.log(props);
   return (
-    <Button onClick={props.onclick} >{props.text}</Button>
+    <Button {...props} onClick={props.onclick}>{props.text}</Button>
   );
 }
 const Button = styled.button`
-  width:100px;
+  width:${(props)=>props.width}px; //250
   font-family: goblin;
-  width:250px;
-  height:50px;
+  height:${(props)=>props.height}px; //50
   background-color:#D9D9D9;
   font-size:25px;
   border-radius:40px;

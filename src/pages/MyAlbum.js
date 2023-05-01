@@ -16,6 +16,10 @@ function MyAlbum() {
     const tocloseMenu = ()=>{
       setShowMenu(false)
   }
+  const toMoveAlbum = ()=>{
+    navigate("/album", {state:{albumName:"FIRST"}});
+   
+}
 
   return (
     <Container>
@@ -24,7 +28,7 @@ function MyAlbum() {
             <Icon src={star} onClick={toshowMenu}/>
             <Title>MY ALBUM</Title>
             <AlbumContainer>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+                <Album onClick={toMoveAlbum}><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
