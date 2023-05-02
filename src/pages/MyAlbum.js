@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
 import star from '../images/star.png'
 import polaroid from '../images/polaroid.svg';
+import React from "react";
 import Menu from "./Menu";
 import { useState } from "react";
+import Header from "../components/Header";
 
 
 function MyAlbum() {
@@ -24,11 +25,13 @@ function MyAlbum() {
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
+        <Header title="MY ALBUM" starOnclick={toshowMenu}/>
         <MainContainer>
-            <Icon src={star} onClick={toshowMenu}/>
-            <Title>MY ALBUM</Title>
             <AlbumContainer>
                 <Album onClick={toMoveAlbum}><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
+                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
                 <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
@@ -52,46 +55,22 @@ const MainContainer = styled.div`
     z-index:1;
     width:100vw;
     height:100vh;
-    position: absolute;
-    margin-top:140px;
-`
-const Icon = styled.img`
-  width:60px;
-  height:60px;
-  margin-left:auto;
-  margin-right:30px;
-  margin-top:20px;
-  position:absolute;
-  top:-70px;
-  right:0px;
-
-
-  @media Screen and (max-width:600px){
-    width:50px;
-    height:50px;
-}
-`
-const Title = styled.div`
-  font-size:40px;
-  margin-top:30px;
-  margin-bottom:60px;
-  @media Screen and (max-width:600px){
-    font-size:30px;
-}
+    padding-top:50px;
+    // border:1px solid black;
 `
 const AlbumContainer = styled.div`
     display:grid;
     grid-template-columns:repeat(3, 1fr);
     margin:auto;
-    margin-top:0px;
-    border:1px solid black;
+    margin-top:40px;
+    padding-top:110px;
+    // border:1px solid black;
     @media Screen and (max-width:900px){
         grid-template-columns:repeat(2, 1fr);
     }
 `
 const Album = styled.div`
     margin:auto;
-
 `
 const Polar = styled.div`
   width:300px;
