@@ -35,7 +35,6 @@ const Span = styled.span`
 const TitleContainer = styled.div`
   margin-bottom:40px;
 `
-
 const Title = styled.div`
   font-size:60px;
   @media Screen and (max-width:800px){

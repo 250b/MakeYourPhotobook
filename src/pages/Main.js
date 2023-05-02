@@ -5,22 +5,23 @@ import frame from '../images/frame.svg';
 import star from '../images/star.png'
 import Menu from "./Menu";
 import { useState } from "react";
+import Header from "../components/Header";
 
 function Main() {
-    let navigate = useNavigate();
-    const [showMenu, setShowMenu] = useState(false)
+    const [showMenu, setShowMenu] = useState(false);
+
     const toshowMenu = ()=>{
         setShowMenu(true)
     }
     const tocloseMenu = ()=>{
       setShowMenu(false)
-  }
+    }
 
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
         <MainContainer>
-            <Icon src={star} onClick={toshowMenu}/>
+            <Header id ="header"leftButton="edit" title="2023.4" rightButton="delete" onclick={toshowMenu}/>
             <ContentContainer>
                 <Title>MAKE YOUR</Title>
                 <Frame src={frame}/>
@@ -45,32 +46,32 @@ const Container = styled.div`
 const MainContainer = styled.div`
     z-index:1;
     width:100vw;
-    position: absolute;
-`
-const ContentContainer = styled.div`
-    @media Screen and (max-width:900px){
-        width:100vw;
-    }
-`
-
-const Title = styled.div`
-  font-size:60px;
-  @media Screen and (max-width:900px){
-    font-size:50px;
-  }
-  @media Screen and (max-width:500px){
-    font-size:40px;
-  }
+    
 `
 const Icon = styled.img`
   width:60px;
   height:60px;
   margin-bottom:50px;
   position:absolute;
-  top:-80px;
-  right:30px;
-
+  top:-70px;
+  right:40px;
 `
+const ContentContainer = styled.div`
+    height:550px;
+    // border:1px solid black;
+    padding-top:110px;
+`
+
+const Title = styled.div`
+  font-size:60px;
+  @media Screen and (max-width:700px){
+    font-size:50px;
+  }
+  @media Screen and (max-width:500px){
+    font-size:40px;
+  }
+`
+
 
 const Frame = styled.img`
   width:400px;
