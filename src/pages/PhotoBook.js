@@ -103,7 +103,6 @@ const Page = React.forwardRef((props, ref) => {
         <MainContainer>
             <ThemeContainer>
                 <Arrow src={arrowLeft} onClick={slideLeft}/>
-
                 <SlideContainer>
                         <ShowContainer>
                         <HTMLFlipBook
@@ -123,7 +122,6 @@ const Page = React.forwardRef((props, ref) => {
                         <div className="demoPage">Page 2</div>
                         <div className="demoPage">Page 3</div>
                         <div className="demoPage">Page 4</div>
-
                         </HTMLFlipBook>
                         </ShowContainer>
                     </SlideContainer>
