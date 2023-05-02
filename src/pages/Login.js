@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
- 
+ import React from "react";
 function Login() {
     let navigate = useNavigate();
 

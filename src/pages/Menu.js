@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
 import star from '../images/star.png'

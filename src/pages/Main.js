@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import frame from '../images/frame.svg';
+import React from "react";
 import Menu from "./Menu";
 import { useState } from "react";
 import Header from "../components/Header";
@@ -18,7 +19,7 @@ function Main() {
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
         <MainContainer>
-            <Header leftButton="edit" title="2023.4" rightButton="delete" onclick={toshowMenu}/>
+            <Header starOnclick={toshowMenu}/>
             <ContentContainer>
                 <Title>MAKE YOUR</Title>
                 <Frame src={frame}/>
