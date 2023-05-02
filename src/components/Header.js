@@ -8,12 +8,12 @@ function Header(props) {
   return (
     <Container>
         <LeftButtonContainer>
-            {props.leftButton?<CustomButton text={props.leftButton} width='100' height="40" />
-            :""}
+            {props.leftButton?<CustomButton text={props.leftButton} width='100' height="40" />:""}
         </LeftButtonContainer>
         <Title>{props.title}</Title>
         <RightButtonContainer>
-            {props.rightButton?<CustomButton text={props.rightButton} width='150' height="40"/>
+            {props.rightButton?
+            <CustomButton text={props.rightButton} width='150' height="40"/>
             :<Icon src={star} onClick={props.onclick}/>}
         </RightButtonContainer>
     </Container>
@@ -27,7 +27,6 @@ const Container = styled.div`
     display:flex;
     flex-direction:vertical;
     justify-content:space-between;
-    // border:1px solid black;
     position:fixed;
     top:0;
 `
@@ -37,7 +36,6 @@ const LeftButtonContainer = styled.div`
     margin-left:30px;
     height:80px;
     padding-top:25px;
-    
 `
 const RightButtonContainer = styled.div`
     min-width:150px;
@@ -45,7 +43,6 @@ const RightButtonContainer = styled.div`
     margin-right:30px;
     height:80px;
     padding-top:25px;
-
 `
 const Icon = styled.img`
   width:60px;
@@ -53,10 +50,8 @@ const Icon = styled.img`
   margin-top:-15px;
 `
 const Title = styled.div`
-    width:100vw;
+  width:100vw;
   font-size:40px;
   margin:auto;
-
-
 `
 export default Header;

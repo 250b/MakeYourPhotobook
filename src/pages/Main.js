@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import CustomButton from "../components/CustomButton"
-import { useNavigate } from "react-router-dom";
 import frame from '../images/frame.svg';
-import star from '../images/star.png'
 import Menu from "./Menu";
 import { useState } from "react";
 import Header from "../components/Header";
@@ -21,7 +18,7 @@ function Main() {
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
         <MainContainer>
-            <Header id ="header"leftButton="edit" title="2023.4" rightButton="delete" onclick={toshowMenu}/>
+            <Header leftButton="edit" title="2023.4" rightButton="delete" onclick={toshowMenu}/>
             <ContentContainer>
                 <Title>MAKE YOUR</Title>
                 <Frame src={frame}/>
@@ -46,7 +43,6 @@ const Container = styled.div`
 const MainContainer = styled.div`
     z-index:1;
     width:100vw;
-    
 `
 const Icon = styled.img`
   width:60px;
@@ -58,10 +54,8 @@ const Icon = styled.img`
 `
 const ContentContainer = styled.div`
     height:550px;
-    // border:1px solid black;
     padding-top:110px;
 `
-
 const Title = styled.div`
   font-size:60px;
   @media Screen and (max-width:700px){
@@ -71,15 +65,12 @@ const Title = styled.div`
     font-size:40px;
   }
 `
-
-
 const Frame = styled.img`
   width:400px;
   height:300px;
-  margin-left:auto;
-  margin-right:auto;
+  margin: 0px auto;
   @media Screen and (max-width:500px){
-    width:320px;
+  width:320px;
   height:240px;
   }
 `
@@ -87,10 +78,7 @@ const InputContainer = styled.div`
   display:flex;
   flex-direction:vertical;
   width:800px;
-  margin-left:auto;
-  margin-right:auto;
-  margin-top:20px;
-  margin-bottom:10px;
+  margin:20px auto 10px auto;
   @media Screen and (max-width:900px){
     width:calc(100vw - 100px);
   }
@@ -98,22 +86,24 @@ const InputContainer = styled.div`
     width:300px;
 `
 const Input  =styled.input`
+  font-family: goblin;
   width:700px;
   height:30px;
   border-radius:30px 0px 0px 30px;
   background-color:#D9D9D9;
   border: 1px solid black;
+  padding:0px 20px;
   margin-left:20px;
   @media Screen and (max-width:900px){
-    width:calc(100vw - 200px);
-    @media Screen and (max-width:500px){
-        width:300px;
+  width:calc(100vw - 200px)};
+  @media Screen and (max-width:500px){
+    width:300px};
 `
 const Button = styled.button`
     font-family: goblin;
     font-size:20px;
     width:100px;
-    height:34px;
+    height:32px;
     margin-left:0px;
     margin-right:20px;
     border: 1px solid black;
