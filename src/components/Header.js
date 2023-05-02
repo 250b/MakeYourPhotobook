@@ -8,27 +8,28 @@ function Header(props) {
   return (
     <Container>
         <LeftButtonContainer>
-            {props.leftButton?<CustomButton text={props.leftButton} width='100' height="40" />:""}
+            {props.leftButton?<CustomButton text={props.leftButton} width='100' height="40" onclick={props.leftButtonOnclick}/>:""}
         </LeftButtonContainer>
         <Title>{props.title}</Title>
         <RightButtonContainer>
             {props.rightButton?
-            <CustomButton text={props.rightButton} width='150' height="40"/>
-            :<Icon src={star} onClick={props.onclick}/>}
+            <CustomButton text={props.rightButton} width='150' height="40" onclick={props.rightButtonOnclick}/>
+            :<Icon src={star} onClick={props.starOnclick}/>}
         </RightButtonContainer>
     </Container>
     
   );
 }
 const Container = styled.div`
-    height:110px;
+    height:140px;
     max-width:100vw;
     margin-Bottom:30px;
     display:flex;
     flex-direction:vertical;
     justify-content:space-between;
-    position:fixed;
+    position:absolute;
     top:0;
+    border:1px solid black;
 `
 const LeftButtonContainer = styled.div`
     min-width:150px;

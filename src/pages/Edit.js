@@ -11,18 +11,12 @@ import arrowLeft from '../images/arrow_left.svg';
 import arrowRight from '../images/arrow_right.svg';
 import frame from '../images/frame1.svg';
 import themeCover from '../images/themeCover.svg';
+import React from "react";
 
 function Edit() {
   return (
     <Container>
         <MainContainer>
-            <SaveButtonContainer>
-                <CustomButton text="edit" width='100' height="40"/>
-            </SaveButtonContainer>
-            <Title>2023.4</Title>
-            <DeleteButtonContainer>
-                <CustomButton text="delete" width='150' height="40"/>
-            </DeleteButtonContainer>
             <span>theme</span>
             <ThemeContainer>
                 <Theme src={themeCover}/>
