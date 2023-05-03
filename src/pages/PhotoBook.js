@@ -12,6 +12,8 @@ import polar from '../images/polaroid.svg'
 
 function PhotoBook() {
     const location = useLocation();
+    const albumName = location.state.albumName.albumName;
+    console.log(location.state.albumName.albumName);
     const [showMenu, setShowMenu] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
    
@@ -46,7 +48,7 @@ function PhotoBook() {
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
-        <Header starOnclick={toshowMenu} leftButton={showEdit?"save":"edit"} leftButtonOnclick={showEdit?tocloseEdit:toshowEdit} rightButton={showEdit?"delete":null}title="2023.04"/>
+        <Header starOnclick={toshowMenu} leftButton={showEdit?"save":"edit"} leftButtonOnclick={showEdit?tocloseEdit:toshowEdit} rightButton={showEdit?"delete":null}title={albumName}/>
         {showEdit?<Edit/>:
         <MainContainer>
                 <HTMLFlipBook

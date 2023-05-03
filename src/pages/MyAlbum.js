@@ -17,9 +17,17 @@ function MyAlbum() {
     const tocloseMenu = ()=>{
       setShowMenu(false)
   }
-  const toMoveAlbum = ()=>{
-    navigate("/album", {state:{albumName:"FIRST"}});
-   
+  const toMoveAlbum = (albumName)=>{
+    navigate("/album", {state:{albumName:{albumName}}});
+}
+
+const albums=["2023.4", "2023.5", "2023.6","2023.7","2023.8","2023.9"];
+const Albums=(albums)=>{
+  return(
+    albums.albums.map((albumName=>(
+      <Album onClick={()=>toMoveAlbum(albumName)}><Polar><img src={polaroid}/><span>{albumName}</span></Polar></Album>
+    ))
+  ))
 }
 
   return (
@@ -28,15 +36,7 @@ function MyAlbum() {
         <Header title="MY ALBUM" starOnclick={toshowMenu} />
         <MainContainer>
             <AlbumContainer>
-                <Album onClick={toMoveAlbum}><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
-                <Album><Polar><img src={polaroid}/><span>ADD</span></Polar></Album>
+              <Albums albums={albums}/>
             </AlbumContainer>
         </MainContainer>
     </Container>
@@ -56,7 +56,6 @@ const MainContainer = styled.div`
     z-index:1;
     width:100vw;
     height:100vh;
-    padding-top:50px;
     // border:1px solid black;
 `
 const AlbumContainer = styled.div`
@@ -96,18 +95,17 @@ const Polar = styled.div`
     }
   }
   >span{
+    width:200px;
     font-family:gochi;
     position:absolute;
     bottom:55px;
     font-size:40px;
-    left:110px;
-    @media Screen and (max-width:900px){
-        left:105px;
-    }
+    left:calc(100% - 250px);
     @media Screen and (max-width:600px){
+      left:calc(100% - 150px);
+      width:120px;
         font-size:25px;
         bottom:15px;
-        left:63px;
     }
   }
 `
