@@ -81,10 +81,10 @@ const InputContainer = styled.div`
   width:800px;
   margin:20px auto 10px auto;
   @media Screen and (max-width:900px){
-    width:calc(100vw - 100px);
+    width:calc(100vw - 200px);
   }
   @media Screen and (max-width:500px){
-    width:300px;
+    width:300px;}
 `
 const Input  =styled.input`
   font-family: goblin;
@@ -94,11 +94,11 @@ const Input  =styled.input`
   background-color:#D9D9D9;
   border: 1px solid black;
   padding:0px 20px;
-  margin-left:20px;
+  margin-left:auto;
   @media Screen and (max-width:900px){
-  width:calc(100vw - 200px)};
+  width:calc(100vw - 100px)};
   @media Screen and (max-width:500px){
-    width:300px};
+    width:200px;}
 `
 const Button = styled.button`
     font-family: goblin;
@@ -106,7 +106,6 @@ const Button = styled.button`
     width:100px;
     height:32px;
     margin-left:0px;
-    margin-right:20px;
     border: 1px solid black;
     border-radius:0px 30px 30px 0px;
     background-color: #FFFFFF;

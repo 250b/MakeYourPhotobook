@@ -32,7 +32,7 @@ const Container = styled.div`
   flex-direction:column;
   justify-content:center;
   background-color: #00000050;
-  z-index:100;
+  z-index:10;
   position : fixed;
   overflow : hidden;
 `
