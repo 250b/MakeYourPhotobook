@@ -80,8 +80,9 @@ const InputContainer = styled.div`
   flex-direction:vertical;
   width:800px;
   margin:20px auto 10px auto;
+  border:1px solid black;
   @media Screen and (max-width:900px){
-    width:calc(100vw - 200px);
+    width:calc(100vw - 100px);
   }
   @media Screen and (max-width:500px){
     width:300px;}
