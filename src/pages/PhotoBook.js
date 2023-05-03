@@ -1,30 +1,22 @@
 import styled from "styled-components";
 import React from "react";
-import CustomButton from "../components/CustomButton"
-import { useNavigate } from "react-router-dom";
-import star from '../images/star.png'
-import polaroid from '../images/polaroid.svg';
 import Menu from "./Menu";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import theme1 from "../images/theme1.svg";
 import theme2 from "../images/theme2.svg";
-import arrowLeft from '../images/arrow_left.svg';
-import arrowRight from '../images/arrow_right.svg';
 import Edit from "./Edit";
 import frame from '../images/frame1.svg'
 import Header from "../components/Header";
 import HTMLFlipBook from "react-pageflip";
+import polar from '../images/polaroid.svg'
 
 function PhotoBook() {
     const location = useLocation();
     console.log(location);
-    const albumName = location.state;
     const [showMenu, setShowMenu] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [saveButton, setSaveButton] = useState("edit");
-    const [slideIndex, setSlideIndex] = useState(0);
-
+   
     const theme1=[{theme1}, {theme2}, {theme1}, {theme2}];
 
     const selectedImages = [{frame}, {frame}, {frame}, {frame} ];
@@ -35,24 +27,6 @@ function PhotoBook() {
     const tocloseMenu = ()=>{
       setShowMenu(false)
   }
-  const slideRight=()=>{
-    console.log(slideIndex)
-    if(slideIndex==3){
-        setSlideIndex(0);
-    }else{
-        setSlideIndex(slideIndex+1);
-    }   
-}
-
-const slideLeft=()=>{
-    console.log(slideIndex)
-    if(slideIndex==3 || slideIndex==0){
-        setSlideIndex(0);
-    }else{
-        setSlideIndex(slideIndex-1);
-    }   
-}
-
 
   const toshowEdit=()=>{
     setShowEdit(true);
@@ -60,39 +34,15 @@ const slideLeft=()=>{
     console.log(showEdit);
   }
 
-const Page = React.forwardRef((props, ref) => {
-    return (
-      <div className="demoPage" ref={ref}> /* ref required */
-        <h1>Page Header</h1>
-        <p>{props.children}</p>
-        <p>Page number: {props.number}</p>
-      </div>
-    );
-  });
-  const PageCover = React.forwardRef((props, ref) => {
-    return (
-      <div className="page page-cover" ref={ref} data-density="hard">
-        <div className="page-content">
-          <h2>{props.children}</h2>
-        </div>
-      </div>
-    );
-  });
-    const [page, setPage] = useState(0)
-    const [totalPage, setTotalPage] = useState(0)
+    // const [page, setPage] = useState(0)
+    // const [totalPage, setTotalPage] = useState(0)
 
 
-    const onPage = (e) => {
-      setPage(
-        e.data,
-      );
-    };
-  
-    const componentDidMount=()=> {
-      setTotalPage(
-        this.flipBook.getPageFlip().getPageCount(),
-      );
-    }
+    // const onPage = (e) => {
+    //   setPage(
+    //     e.data,
+    //   );
+    // };
   
   
   return (
@@ -101,32 +51,24 @@ const Page = React.forwardRef((props, ref) => {
         <Header starOnclick={toshowMenu} leftButton="edit" leftButtonOnclick={toshowEdit} title="2023.04"/>
         {showEdit?<Edit/>:
         <MainContainer>
-            <ThemeContainer>
-                <Arrow src={arrowLeft} onClick={slideLeft}/>
-                <SlideContainer>
-                        <ShowContainer>
-                        <HTMLFlipBook
-                            width={550}
-                            height={733}
-                            size="stretch"
-                            minWidth={0}
-                            maxWidth={1300}
-                            minHeight={400}
-                            maxHeight={1533}
-                            maxShadowOpacity={0.5}
-                            showCover={true}
-                            mobileScrollSupport={true}
-                            onFlip={onPage}
-                            className="demo-book"
-                        ><img src={theme2}/>
-                        <div className="demoPage">Page 2</div>
-                        <div className="demoPage">Page 3</div>
-                        <div className="demoPage">Page 4</div>
-                        </HTMLFlipBook>
-                        </ShowContainer>
-                    </SlideContainer>
-                <Arrow src={arrowRight} onClick={slideRight}/>
-            </ThemeContainer>
+                <HTMLFlipBook
+                    width={800}
+                    height={800} 
+                    size="stretch"
+                    minWidth={0}
+                    // maxWidth={1500}
+                    // minHeight={1000}
+                    // maxHeight={1000}
+                    maxShadowOpacity={0.3}
+                    showCover={true}
+                    mobileScrollSupport={true}
+                    // onFlip={onPage}
+                    className="demo-book">
+                        <div><Image src={frame}/></div>
+                        <div><Image src={theme2}/></div>
+                        <div><Image src={polar}/></div>
+                        <div><Image src={theme2}/></div>
+                 </HTMLFlipBook>
         </MainContainer>}
     </Container>
   );
@@ -138,49 +80,41 @@ const Container = styled.div`
   display:flex;
   flex-direction:column;
   justify-content:center;
-
 `
 const MainContainer = styled.div`
     z-index:1;
-    width:100vw;
+    width:900px;
+    max-height:800px;
+    margin: auto;
+    padding-top:140px;
     display:flex;
-    flex-direction:column;
+    // border:1px solid black;
     text-align:center;
-`
-const ThemeContainer = styled.div`
-    display:flex;
-    flex-direction:vertical;
-    justify-content:center;
-    border:1px solid black;
-`
-const Arrow = styled.img`
-    width:35px;
-    height:35px;
-    margin: auto 60px;
-`
-const Theme = styled.img`
-    width:800px;
-    height:600px;
-`
-const ShowContainer =styled.div`
-    overflow:hidden;
-    display:flex;
-    margin-top:50px;
-    width:500px;
-    height:350px;
-    .book{
-        border:1px solid black;
+    @media Screen and (max-width:1000px){
+        width:560px;
+        padding-top:140px;
+        padding-bottom:140px;
+    }
+    @media Screen and (max-width:600px){
+        width:100px;
+        height100px;
+        margin-left:140px;
+        padding-top:100px;
+        padding-bottom:200px;
     }
 `
-const ImageContainer = styled.div`
-  width:1000px;
-  display:flex;
-  flex-direction:vertical;
-`
-const Image = styled.div`
-  display:flex;
-`
-const SlideContainer = styled.div`
-  position:absolute;
+const Image = styled.img`
+    width:450px;
+    height:450px;
+    border:2px solid black;
+    @media Screen and (max-width:1000px){
+        width:280px;
+    }
+    @media Screen and (max-width:600px){
+        width:300px;
+        height:300px;
+        padding-top:0px;
+    }
+    
 `
 export default PhotoBook;

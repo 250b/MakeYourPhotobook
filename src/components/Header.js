@@ -29,7 +29,7 @@ const Container = styled.div`
     justify-content:space-between;
     position:absolute;
     top:0;
-    border:1px solid black;
+    // border:1px solid black;
 `
 const LeftButtonContainer = styled.div`
     min-width:150px;
