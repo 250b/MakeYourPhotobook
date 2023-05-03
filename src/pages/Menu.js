@@ -14,10 +14,10 @@ function Menu(props) {
   return (
     <Container>
         <ContentContainer>
-            <Icon src={star} onClick={props.onclick}/>
-            <div>'s photobook</div>
+            <Icon className="star" src={star} onClick={props.onclick}/>
+            <div className="name">'s photobook</div>
             <MenuList onClick={toMyAlbum}>My Album</MenuList>
-            <MenuList>개인정보</MenuList>
+            <MenuList>ACCOUNT</MenuList>
             <MenuList>LOGOUT</MenuList>
         </ContentContainer>
     </Container>
@@ -34,6 +34,7 @@ const Container = styled.div`
   background-color: #00000050;
   z-index:10;
   position : fixed;
+  top:0px;
   overflow : hidden;
 `
 const ContentContainer = styled.div`
@@ -42,22 +43,42 @@ const ContentContainer = styled.div`
     height:100%;
     margin-left:auto;
     border:1px solid black;
+    position:fixed;
+    right:0px;
+    .name{
+      margin-top:120px;
+      padding-bottom:10px;
+      border-bottom:1px solid black;
+    }
 `
 
 const Icon = styled.img`
+  position:fixed;
+  right:0px;
+  top:10px;
   width:60px;
   height:60px;
-  margin-left:auto;
-  margin-right:20px;
-  margin-bottom:50px;
+  margin-right:30px;
+  @media Screen and (max-width:600px){
+    width:40px;
+    height:40px;
+    top:25px;
+    right:-10px;
+    margin-right:30px;
+    margin-top:0px;
+  }
 `
 const MenuList = styled.button`
+
     width:300px;
     height:80px;
     text-align:center;
     font-size:20px;
     font-family: goblin;
-    border:1px solid black;
+    border-bottom:1px solid black;
+    border-left:0px;
+    border-right:0px;
+    border-top:0px;
     background-color:#00000000;
 `
 

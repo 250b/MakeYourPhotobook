@@ -33,16 +33,6 @@ function PhotoBook() {
     setSaveButton("save");
     console.log(showEdit);
   }
-
-    // const [page, setPage] = useState(0)
-    // const [totalPage, setTotalPage] = useState(0)
-
-
-    // const onPage = (e) => {
-    //   setPage(
-    //     e.data,
-    //   );
-    // };
   
   
   return (

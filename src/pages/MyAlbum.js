@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import star from '../images/star.png'
 import polaroid from '../images/polaroid.svg';
 import React from "react";
 import Menu from "./Menu";
@@ -11,9 +10,10 @@ import Header from "../components/Header";
 function MyAlbum() {
   let navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false)
+
     const toshowMenu = ()=>{
-        setShowMenu(true)
-    }
+      setShowMenu(true)
+  }
     const tocloseMenu = ()=>{
       setShowMenu(false)
   }
@@ -25,7 +25,7 @@ function MyAlbum() {
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
-        <Header title="MY ALBUM" starOnclick={toshowMenu}/>
+        <Header title="MY ALBUM" starOnclick={toshowMenu} />
         <MainContainer>
             <AlbumContainer>
                 <Album onClick={toMoveAlbum}><Polar><img src={polaroid}/><span>FIRST</span></Polar></Album>
@@ -49,6 +49,7 @@ const Container = styled.div`
   display:flex;
   flex-direction:column;
   justify-content:center;
+  z-index:1;
 
 `
 const MainContainer = styled.div`
