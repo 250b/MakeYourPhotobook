@@ -38,7 +38,7 @@ function PhotoBook() {
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
-        <Header starOnclick={toshowMenu} leftButton="edit" leftButtonOnclick={toshowEdit} title="2023.04"/>
+        <Header starOnclick={toshowMenu} leftButton="edit" leftButtonOnclick={toshowEdit} rightButton={showEdit?"delete":null}title="2023.04"/>
         {showEdit?<Edit/>:
         <MainContainer>
                 <HTMLFlipBook

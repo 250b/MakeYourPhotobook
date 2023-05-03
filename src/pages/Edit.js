@@ -16,7 +16,6 @@ import React from "react";
 function Edit() {
   return (
     <Container>
-        <MainContainer>
             <span>theme</span>
             <ThemeContainer>
                 <Theme src={themeCover}/>
@@ -35,65 +34,31 @@ function Edit() {
                 <Photo src={frame}/>
                 <Photo src={frame}/>
             </PhotoContainer>
-        </MainContainer>
     </Container>
   );
 }
 
 const Container = styled.div`
-  font-family: goblin;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+    font-family: goblin;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    margin: auto;
+    padding-top:130px;
+    display:flex;
+    text-align:center;
+    @media Screen and (max-width:1300px){
+        width:calc(100vw - 0px);
+    }
 
-`
-const MainContainer = styled.div`
-    z-index:1;
-    width:100vw;
-    height:100vh;
-    position: absolute;
-    margin-top:140px;
-`
+    >span{
+        font-size:25px;
+        margin:20px 0px;
+    }
 
-const SaveButtonContainer = styled. div`
-    position:absolute;
-    top:-30px;
-    left:30px;
-`
-const DeleteButtonContainer = styled. div`
-    position:absolute;
-    top:-30px;
-    right:30px;
-`
-const Icon = styled.img`
-  width:60px;
-  height:60px;
-  margin-left:auto;
-  margin-right:30px;
-  margin-top:20px;
-  position:absolute;
-  top:-70px;
-  right:0px;
-
-
-  @media Screen and (max-width:600px){
-    width:50px;
-    height:50px;
-}
-`
-const Title = styled.div`
-  font-size:40px;
-  margin-top:30px;
-  margin-bottom:60px;
-  @media Screen and (max-width:600px){
-    font-size:30px;
-}
 `
 const ThemeContainer = styled.div`
-    width:1000px;
-    height:300px;
-    border:1px solid black;
     display:flex;
     flex-direction:vertical;
     justify-content:center;
@@ -101,21 +66,40 @@ const ThemeContainer = styled.div`
     grid-template-columns:repeat(5, 1fr);
     margin: auto;
     margin-bottom:20px;
+    border:2px solid black;
+    @media Screen and (max-width:1300px){
+        grid-template-columns:repeat(3, 1fr);
+    }
+     
 `
 const Theme = styled.img`
-    width:190px;
+    width:160px;
     height:300px;
+    padding: 0px 20px;
+    @media Screen and (max-width:600px){
+        width:100px;
+        height:150px;
+        padding:0px 10px;
+    }
 `
 const PhotoContainer = styled.div`
     display:grid;
     grid-template-columns:repeat(5, 1fr);
-    width:1000px;
     margin:auto;
+    @media Screen and (max-width:1300px){
+        grid-template-columns:repeat(3, 1fr);
+    }
 `
 const Photo = styled.img`
-    width:150px;
+    padding: 10px 20px;
+    width:160px;
+    height:300px;
     margin:auto;
-    margin-bottom:20px;
+    @media Screen and (max-width:600px){
+        width:100px;
+        height:150px;
+        padding:5px 10px;
+    }
 `
 
 export default Edit;
