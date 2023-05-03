@@ -86,21 +86,22 @@ const MainContainer = styled.div`
     width:900px;
     max-height:800px;
     margin: auto;
-    padding-top:140px;
+    padding-top:130px;
     display:flex;
     // border:1px solid black;
     text-align:center;
     @media Screen and (max-width:1000px){
         width:600px;
-        padding-top:140px;
+        padding-top:120px;
         padding-bottom:140px;
     }
     @media Screen and (max-width:600px){
         width:0px;
         height100px;
         margin-left:calc(50vw - 150px);
-        padding-top:100px;
-        padding-bottom:200px;
+        padding-top:140px;
+        margin-top:auto;
+        margin-bottom:auto;
     }
 `
 const Image = styled.img`
