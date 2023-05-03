@@ -8,11 +8,11 @@ function CustomButton(props) {
   );
 }
 const Button = styled.button`
-  width:${(props)=>props.width||250}px;
+  width:${(props)=>props.isMobile?"":props.width||250}px;
   font-family: goblin;
   height:${(props)=>props.height||50}px;
   background-color:#D9D9D9;
-  font-size:25px;
+  font-size:${(props)=>props.isMobile?15:20}px;
   border-radius:40px;
   margin-left:auto;
   margin-right:auto;

@@ -59,7 +59,7 @@ const ContentContainer = styled.div`
 `
 const Title = styled.div`
   font-size:60px;
-  @media Screen and (max-width:700px){
+  @media Screen and (max-width:600px){
     font-size:50px;
   }
   @media Screen and (max-width:500px){
@@ -80,7 +80,6 @@ const InputContainer = styled.div`
   flex-direction:vertical;
   width:800px;
   margin:20px auto 10px auto;
-  border:1px solid black;
   @media Screen and (max-width:900px){
     width:calc(100vw - 100px);
   }

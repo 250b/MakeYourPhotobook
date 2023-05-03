@@ -55,7 +55,7 @@ function PhotoBook() {
                     width={800}
                     height={800} 
                     size="stretch"
-                    minWidth={0}
+                    minWidth={300}
                     // maxWidth={1500}
                     // minHeight={1000}
                     // maxHeight={1000}
@@ -91,14 +91,14 @@ const MainContainer = styled.div`
     // border:1px solid black;
     text-align:center;
     @media Screen and (max-width:1000px){
-        width:560px;
+        width:600px;
         padding-top:140px;
         padding-bottom:140px;
     }
     @media Screen and (max-width:600px){
-        width:100px;
+        width:0px;
         height100px;
-        margin-left:140px;
+        margin-left:calc(50vw - 150px);
         padding-top:100px;
         padding-bottom:200px;
     }
