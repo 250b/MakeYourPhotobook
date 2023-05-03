@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 function CustomButton(props) {
-  console.log(props);
   return (
     <Button {...props} onClick={props.onclick}>{props.text}</Button>
   );

@@ -3,23 +3,20 @@ import React from "react";
 import Menu from "./Menu";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import theme2 from "../images/theme2.svg";
 import Edit from "./Edit";
-import frame from '../images/frame1.svg'
+import frame2 from '../images/frame2.svg'
+import frame3 from '../images/frame3.svg'
 import Header from "../components/Header";
 import HTMLFlipBook from "react-pageflip";
 import polar from '../images/polaroid.svg'
 
 function PhotoBook() {
     const location = useLocation();
-    console.log(location);
     const [showMenu, setShowMenu] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
-    const [saveButton, setSaveButton] = useState("edit");
    
-    const theme1=[{theme1}, {theme2}, {theme1}, {theme2}];
-
-    const selectedImages = [{frame}, {frame}, {frame}, {frame} ];
+    const theme=["url('./theme1.svg')", "url('./theme2.svg')", "url('./theme1.svg')", "url('./theme2.svg')"];
+    const selectedImages = [frame2, frame3, frame2, frame3 ];
 
     const toshowMenu = ()=>{
         setShowMenu(true)
@@ -30,20 +27,31 @@ function PhotoBook() {
 
   const toshowEdit=()=>{
     setShowEdit(true);
-    setSaveButton("save");
-    console.log(showEdit);
   }
-  
+  const tocloseEdit=()=>{
+    setShowEdit(false);
+  }
+
+  const Pages=(theme, selectedImages)=>{
+    console.log(theme);
+    console.log(selectedImages);
+     const result=[];
+      for(let i=0; i< selectedImages.length; i++){
+        result.push(<Page theme={theme[i%theme.length]}><Image src={selectedImages[i]}/></Page>)
+      }
+      console.log(result);
+      return result;
+  }
   
   return (
     <Container>
         {showMenu?<Menu onclick={tocloseMenu}/>:""}
-        <Header starOnclick={toshowMenu} leftButton="edit" leftButtonOnclick={toshowEdit} rightButton={showEdit?"delete":null}title="2023.04"/>
+        <Header starOnclick={toshowMenu} leftButton={showEdit?"save":"edit"} leftButtonOnclick={showEdit?tocloseEdit:toshowEdit} rightButton={showEdit?"delete":null}title="2023.04"/>
         {showEdit?<Edit/>:
         <MainContainer>
                 <HTMLFlipBook
-                    width={800}
-                    height={800} 
+                    width={700}
+                    height={900} 
                     size="stretch"
                     minWidth={300}
                     // maxWidth={1500}
@@ -54,10 +62,11 @@ function PhotoBook() {
                     mobileScrollSupport={true}
                     // onFlip={onPage}
                     className="demo-book">
-                        <div><Image src={frame}/></div>
-                        <div><Image src={theme2}/></div>
-                        <div><Image src={polar}/></div>
-                        <div><Image src={theme2}/></div>
+                    {Pages(theme, selectedImages)}
+                        {/* <Page theme="url('./theme1.svg')"><Image src={frame}/></Page>
+                        <Page theme={theme1}><Image src={frame}/></Page>
+                        <Page theme={theme1}><Image src={frame}/></Page>
+                        <Page theme={theme1}><Image src={frame}/></Page> */}
                  </HTMLFlipBook>
         </MainContainer>}
     </Container>
@@ -73,8 +82,8 @@ const Container = styled.div`
 `
 const MainContainer = styled.div`
     z-index:1;
-    width:900px;
-    max-height:800px;
+    width:800px;
+    max-height:800ppx;
     margin: auto;
     padding-top:130px;
     display:flex;
@@ -82,7 +91,7 @@ const MainContainer = styled.div`
     text-align:center;
     @media Screen and (max-width:1000px){
         width:600px;
-        padding-top:120px;
+        padding-top:180px;
         padding-bottom:140px;
     }
     @media Screen and (max-width:600px){
@@ -94,18 +103,34 @@ const MainContainer = styled.div`
         margin-bottom:auto;
     }
 `
-const Image = styled.img`
-    width:450px;
-    height:450px;
+const Page = styled.div`
+    min-width:400px;
+    min-height:400px;
+    background-image:${(props)=>props.theme};
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    background-attachment: fixed;
     border:2px solid black;
     @media Screen and (max-width:1000px){
-        width:280px;
+        min-width:270px;
+        min-height:360px;
     }
     @media Screen and (max-width:600px){
         width:300px;
-        height:300px;
         padding-top:0px;
     }
-    
+`
+const Image = styled.img`
+  width:400px;
+  height:450px;
+  margin-top:30px;
+  object-fil:cover;
+  border:2px solid black;
+  @media Screen and (max-width:1000px){
+      width:270px;
+      height:360px;
+      margin-top:10px;
+  }
 `
 export default PhotoBook;

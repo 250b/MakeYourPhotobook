@@ -13,6 +13,7 @@ function Menu(props) {
 
   return (
     <Container>
+      
         <ContentContainer>
             <Icon className="star" src={star} onClick={props.onclick}/>
             <div className="name">'s photobook</div>
