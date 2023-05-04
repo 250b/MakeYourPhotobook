@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Main from './pages/Main';
 import MyAlbum from './pages/MyAlbum';
 import PhotoBook from './pages/PhotoBook';
+import CreateAlbum from './pages/CreateAlbum';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/main' element ={<Main/>}/>
           <Route path='/myalbum' element ={<MyAlbum/>}/>
           <Route path='/album' element ={<PhotoBook/>}/>
+          <Route path='/createAlbum' element ={<CreateAlbum/>}/>
         </Routes>
       </BrowserRouter>
       

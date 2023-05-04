@@ -12,7 +12,7 @@ function Header(props) {
   return (
     <Container>
         <LeftButtonContainer>
-            {props.leftButton?<CustomButton text={props.leftButton} width='100' height="40" isMobile = {isMobile} onclick={props.leftButtonOnclick}/>:""}
+            {props.leftButton?<CustomButton text={props.leftButton} width='110' height="40" isMobile = {isMobile} onclick={props.leftButtonOnclick}/>:""}
         </LeftButtonContainer>
         <Title>{props.title}</Title>
         <RightButtonContainer>

@@ -20,6 +20,9 @@ function MyAlbum() {
   const toMoveAlbum = (albumName)=>{
     navigate("/album", {state:{albumName:{albumName}}});
 }
+const toMoveCreate = ()=>{
+  navigate("/createAlbum");
+}
 
 const albums=["2023.4", "2023.5", "2023.6","2023.7","2023.8","2023.9"];
 const Albums=(albums)=>{
@@ -37,6 +40,7 @@ const Albums=(albums)=>{
         <MainContainer>
             <AlbumContainer>
               <Albums albums={albums}/>
+              <Album onClick={toMoveCreate}><Polar><img src={polaroid}/><span>{"albumName"}</span></Polar></Album>
             </AlbumContainer>
         </MainContainer>
     </Container>
