@@ -5,10 +5,48 @@ import { useState } from "react";
 import Edit from "./Edit";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { firestore } from "../firebase";
+import { getAuth,onAuthStateChanged } from 'firebase/auth';
 
 function CreateAlbum() {
     let navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false)
+    const [title, setTitle] = useState();
+    const [userEmail, setUserEmail] = useState();
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserEmail(user.email)
+        // ...
+      } else {
+    
+      }
+    });
+
+
+
+    const [selectedTheme, setSelectedTheme]= useState();
+    const [selectedPhoto, setSelectedPhoto] = useState([]);
+
+    const handleSelectedTheme=(e)=>{
+        setSelectedTheme(e.target.value)
+        console.log(e.target.value)
+    }
+    const handleSelectedPhoto=(e)=>{
+        let include = selectedPhoto.includes(e.target.value);
+        if(!include){
+            setSelectedPhoto(selectedPhoto.concat(e.target.value));
+        }else{
+            const filtered = selectedPhoto.filter((filter)=>filter!==e.target.value)
+            setSelectedPhoto(filtered)
+        }
+    }
+
+    const onTitleChange=(event)=>{
+        setTitle(event.target.value)
+    }
+
 
     const toshowMenu = ()=>{
       setShowMenu(true)
@@ -16,19 +54,39 @@ function CreateAlbum() {
   const tocloseMenu = ()=>{
     setShowMenu(false)
 }
-    const toMoveMyAlbum=()=>{
-        navigate('/myalbum')
+    const toCreate=()=>{
+        try{
+            const user = firestore.collection("user");
+
+            user.doc(userEmail).get().then((doc) => {
+                const userInfo = doc.data();
+            const newList = [...userInfo.album, title];
+            console.log(newList);
+            user.doc(userEmail).set({email: userEmail, album: newList});
+            })
+            
+            const album = firestore.collection("album");
+            console.log(title);
+            album.doc(title).set({title:title, theme:selectedTheme, creater:userEmail})
+
+            navigate('/myalbum')
+        }catch(error){
+            console.log(error)
+        }
+
     }
+
+
     return(
         <Container>
             {showMenu?<Menu onclick={tocloseMenu}/>:""}
             <HeaderContainer>
-                <Header starOnclick={toshowMenu} leftButton={"create"} leftButtonOnclick={toMoveMyAlbum}></Header>
+                <Header starOnclick={toshowMenu} leftButton={"create"} leftButtonOnclick={toCreate}></Header>
                 <TitleContainer>
-                    <Input placeholder={"TITLE"}/>
+                    <Input placeholder={"TITLE"} onChange={onTitleChange} value={title}/>
                 </TitleContainer>
             </HeaderContainer>
-            <Edit/>
+            <Edit handleSelectedTheme={handleSelectedTheme} handleSelectedPhoto={handleSelectedPhoto} selectedTheme={selectedTheme} selectedPhoto={selectedPhoto}/>
         </Container>
   );
 }
@@ -45,7 +103,7 @@ const HeaderContainer = styled.div`
 const TitleContainer = styled.div`
     display:flex;
     flex-direction:vertical;
-    width:400px;
+    // width:400px;
     position:absolute;
     z-index:2;
     .left{
@@ -57,17 +115,12 @@ const TitleContainer = styled.div`
         top:10px;
     }
 `
-const Ld = styled.span`
-    font-size:100px;
-    position:absolute;
-    font-family:Segoe UI;
-`
 const Input = styled.input`
 z-index:2;
 font-family:goblin;
-width:400px;
+width:300px;
 height:40px;
-left:calc(50vw - 200px);
+left:calc(50vw - 150px);
 position:absolute;
 top:40px;
 font-size:40px;
@@ -76,7 +129,10 @@ padding-bottom:20px;
 text-align:center;
 border-bottom:5px solid black;
 @media Screen and (max-width:600px){
-    font-size:24px;
+    font-size:20px;
+    width:150px;
+    left:calc(50vw - 75px);
+    padding-bottom:10px;
   }
 
 `

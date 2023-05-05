@@ -12,19 +12,21 @@ import { getAuth,onAuthStateChanged } from 'firebase/auth';
 function MyAlbum() {
   let navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false)
-    const [albums, setAlbums] = useState([]);
+    const [album, setAlbum] = useState([]);
 
 
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
+
         const userEmail = user.email;
         const users = firestore.collection("user");
         // collection의 document인 "bucket_item"을 가져온다.
         users.doc(userEmail).get().then((doc) => {
           const userInfo = doc.data();
-          setAlbums(userInfo.album);
+          setAlbum(userInfo.album);
+          // console.log(album)
         })
 
       } else {
@@ -47,12 +49,21 @@ const toMoveCreate = ()=>{
 }
 
 
-const Albums=(albums)=>{
-  return(
-    albums.albums.map((albumName=>(
-      <Album onClick={()=>toMoveAlbum(albumName)}><Polar><img src={polaroid}/><span>{albumName}</span></Polar></Album>
+const Albums=(album)=>{
+  if(album.album!=undefined){
+    return(
+      album.album.map((albumName=>(
+        <Album onClick={()=>toMoveAlbum(albumName)}><Polar><img src={polaroid}/><span>{albumName}</span></Polar></Album>
+      ))
     ))
-  ))
+
+  }
+  // return(
+  //   album.album.map((albumName=>(
+  //     <Album onClick={()=>toMoveAlbum(albumName)}><Polar><img src={polaroid}/><span>{albumName}</span></Polar></Album>
+  //   ))
+  // )
+  // )
 }
 
   return (
@@ -61,7 +72,7 @@ const Albums=(albums)=>{
         <Header title="MY ALBUM" starOnclick={toshowMenu} />
         <MainContainer>
             <AlbumContainer>
-              <Albums albums={albums}/>
+              <Albums album={album}/>
               <Album onClick={toMoveCreate}><Polar><span>{"+"}</span></Polar></Album>
             </AlbumContainer>
         </MainContainer>
