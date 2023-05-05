@@ -16,7 +16,7 @@ function Menu(props) {
       
         <ContentContainer>
             <Icon className="star" src={star} onClick={props.onclick}/>
-            <div className="name">'s photobook</div>
+            <div className="div"></div>
             <MenuList onClick={toMyAlbum}>My Album</MenuList>
             <MenuList>ACCOUNT</MenuList>
             <MenuList>LOGOUT</MenuList>
@@ -46,8 +46,8 @@ const ContentContainer = styled.div`
     border:1px solid black;
     position:fixed;
     right:0px;
-    .name{
-      margin-top:120px;
+    .div{
+      margin-top:80px;
       padding-bottom:10px;
       border-bottom:1px solid black;
     }
