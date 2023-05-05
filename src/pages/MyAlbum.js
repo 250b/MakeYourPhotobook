@@ -58,12 +58,6 @@ const Albums=(album)=>{
     ))
 
   }
-  // return(
-  //   album.album.map((albumName=>(
-  //     <Album onClick={()=>toMoveAlbum(albumName)}><Polar><img src={polaroid}/><span>{albumName}</span></Polar></Album>
-  //   ))
-  // )
-  // )
 }
 
   return (
@@ -73,7 +67,7 @@ const Albums=(album)=>{
         <MainContainer>
             <AlbumContainer>
               <Albums album={album}/>
-              <Album onClick={toMoveCreate}><Polar><span>{"+"}</span></Polar></Album>
+              <Album onClick={toMoveCreate}><Polar><Add className="add"><div>+</div></Add></Polar></Album>
             </AlbumContainer>
         </MainContainer>
     </Container>
@@ -108,6 +102,8 @@ const AlbumContainer = styled.div`
 `
 const Album = styled.div`
     margin:auto;
+    
+}
 `
 const Polar = styled.div`
   width:300px;
@@ -144,6 +140,28 @@ const Polar = styled.div`
         font-size:25px;
         bottom:15px;
     }
+  }
+`
+const Add= styled.div`
+  width:300px;
+    height:300px;
+    position:relative;
+    margin:auto;
+  @media Screen and (max-width:600px){
+    width:180px;
+    height:180px;
+  }
+  >div{
+    font-size:100px;
+    font-family:Roboto;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
   }
 `
 export default MyAlbum;
