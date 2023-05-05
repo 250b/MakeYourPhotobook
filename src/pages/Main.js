@@ -4,8 +4,20 @@ import React from "react";
 import Menu from "./Menu";
 import { useState } from "react";
 import Header from "../components/Header";
+import { onAuthStateChanged, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 function Main() {
+
+  const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(user.email);
+    // ...
+  } else {
+
+  }
+});
+
     const [showMenu, setShowMenu] = useState(false);
 
     const toshowMenu = ()=>{

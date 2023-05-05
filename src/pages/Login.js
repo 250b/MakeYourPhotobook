@@ -1,41 +1,120 @@
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
- import React from "react";
+ import React, { useEffect, useState } from "react";
+ import { firestore } from '../firebase';
+ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+
 function Login() {
     let navigate = useNavigate();
+    const [signupEmail, setSignupEmail] = useState("");
+    const [signupPw, setSignupPw] = useState("");
+    const [signupPwCheck, setSignupPwCheck] = useState("");
+    const [signup, setSignup] = useState(true);
 
-    const toMain =() =>{
-        navigate("/main")
-    };
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPw, setLoginPw] = useState("");
+    const [login, setLogin] = useState(true);
 
-    const InputForm = (inputList) =>{
-        return(
-            inputList.inputList.map(list =>
-                (
-                    <div>
-                        <InputTitle>{list}</InputTitle>
-                        <Input></Input>
-                    </div>
-                ))
-            )
-        }
-
-    const InputContainer = ({title, inputList, onclick})=>{
-    return(
-        <LoginContainer>
-            <Title>{title}</Title>
-            <InputForm inputList={inputList}/>
-            <CustomButton text="YES!" onclick={onclick}/>
-        </LoginContainer>
-      )
+    const toMain = async () => {
+            try {
+              const auth = getAuth();
+              console.log(auth);
+              const { user } = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
+              console.log(user);
+              const { stsTokenManager, uid } = user;
+              navigate('/main');
+            //   setAuthInfo({ uid, email, authToken: stsTokenManager });
+            } catch (error) {
+              console.log(error);
+            }
     }
+
+
+    const onLoginChange=(event)=>{
+        const {
+            target: { name, value }
+          } = event
+          if (name === 'email') {
+              setLoginEmail(value);
+              if((value!="" && loginPw!="")){
+                setLogin(false);
+              }else{
+                setLogin(true);
+              }
+          } else if (name === 'pw') {
+              setLoginPw(value);
+              if(loginEmail!="" && value!=""){
+                setLogin(false);
+              }else{
+                setLogin(true);
+              }
+          }
+    }
+
+    const onSignupChange = (event) => {
+        const {
+          target: { name, value }
+        } = event
+        if (name === 'email') {
+            setSignupEmail(value);
+            if((signupPw===signupPwCheck) && (value!="")){
+                setSignup(false);
+            }else{
+                setSignup(true);
+            }
+        } else if (name === 'pw') {
+            setSignupPw(value);
+            if((value===signupPwCheck) && (signupEmail!="")){
+                setSignup(false);
+            }else{
+                setSignup(true);
+            }
+        }else if (name === 'pwCheck') {
+            setSignupPwCheck(value);
+            if((value===signupPw) &&(signupEmail!="")){
+                setSignup(false);
+            }else{
+                setSignup(true);
+            }
+        }};
+
+        const joinWithVerification = async (email, pw) => {
+        try {
+            const auth = getAuth();
+            const { user } = await createUserWithEmailAndPassword(auth, email, pw);
+
+            const userInfo = firestore.collection("user");
+
+            userInfo.doc(user.email).set({email: user.email, album: []});
+
+          } catch (error) {
+            alert(error);
+          }
+      };
 
     return (
         <Container>
-            <InputContainer title="Login" inputList={["EMAIL", "PW"]} onclick = {toMain}/>
+            <LoginContainer>
+                <Title>Login</Title>
+                <InputTitle>EMAIL</InputTitle>
+                <Input name="email" value={loginEmail} onChange={onLoginChange}></Input>
+                <InputTitle>PW</InputTitle>
+                <Input name="pw" value={loginPw} type="password" onChange={onLoginChange}></Input>
+                <CustomButton text="YES!" onclick={toMain} disabled={login}/>
+            </LoginContainer>
             <Line/>
-            <InputContainer title="SIGN UP" inputList={["EMAIL", "PW", "PW CHECK"]}/>
+            <LoginContainer>
+                <Title>SIGN UP</Title>
+                <InputTitle>EMAIL</InputTitle>
+                <Input name="email" value={signupEmail} onChange={onSignupChange}></Input>
+                <InputTitle>PW</InputTitle>
+                <Input name="pw" value={signupPw}  type="password" onChange={onSignupChange}></Input>
+                <InputTitle>PW CHECK</InputTitle>
+                <Input name="pwCheck" value={signupPwCheck}  type="password" onChange={onSignupChange}></Input>
+                <CustomButton text="YES!" onclick={()=>joinWithVerification(signupEmail,signupPw)} disabled={signup}/>
+            </LoginContainer>
         </Container>
     );
 }
