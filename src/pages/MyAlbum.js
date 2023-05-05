@@ -5,11 +5,33 @@ import React from "react";
 import Menu from "./Menu";
 import { useState } from "react";
 import Header from "../components/Header";
+import { firestore } from '../firebase';
+import { getAuth,onAuthStateChanged } from 'firebase/auth';
 
 
 function MyAlbum() {
   let navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false)
+    const [albums, setAlbums] = useState([]);
+
+
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userEmail = user.email;
+        const users = firestore.collection("user");
+        // collection의 document인 "bucket_item"을 가져온다.
+        users.doc(userEmail).get().then((doc) => {
+          const userInfo = doc.data();
+          setAlbums(userInfo.album);
+        })
+
+      } else {
+    
+      }
+    });
+
 
     const toshowMenu = ()=>{
       setShowMenu(true)
@@ -24,7 +46,7 @@ const toMoveCreate = ()=>{
   navigate("/createAlbum");
 }
 
-const albums=["2023.4", "2023.5", "2023.6","2023.7","2023.8","2023.9"];
+
 const Albums=(albums)=>{
   return(
     albums.albums.map((albumName=>(
@@ -40,7 +62,7 @@ const Albums=(albums)=>{
         <MainContainer>
             <AlbumContainer>
               <Albums albums={albums}/>
-              <Album onClick={toMoveCreate}><Polar><img src={polaroid}/><span>{"albumName"}</span></Polar></Album>
+              <Album onClick={toMoveCreate}><Polar><span>{"+"}</span></Polar></Album>
             </AlbumContainer>
         </MainContainer>
     </Container>
