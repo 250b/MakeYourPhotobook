@@ -10,6 +10,9 @@ function Menu(props) {
     const toMyAlbum =()=>{
         navigate('/myalbum')
     }
+    const toMain =()=>{
+      navigate('/main')
+  }
 
   return (
     <Container>
@@ -17,7 +20,8 @@ function Menu(props) {
         <ContentContainer>
             <Icon className="star" src={star} onClick={props.onclick}/>
             <div className="div"></div>
-            <MenuList onClick={toMyAlbum}>My Album</MenuList>
+            <MenuList onClick={toMain}>HOME</MenuList>
+            <MenuList onClick={toMyAlbum}>My ALBUM</MenuList>
             <MenuList>ACCOUNT</MenuList>
             <MenuList>LOGOUT</MenuList>
         </ContentContainer>
