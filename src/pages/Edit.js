@@ -1,52 +1,80 @@
 import styled from "styled-components";
-import CustomButton from "../components/CustomButton"
-import { useNavigate } from "react-router-dom";
-import star from '../images/star.png'
-import polaroid from '../images/polaroid.svg';
-import Menu from "./Menu";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import theme1 from "../images/theme1.svg";
-import arrowLeft from '../images/arrow_left.svg';
-import arrowRight from '../images/arrow_right.svg';
 import frame from '../images/frame1.svg';
-import themeCover1 from '../images/themeCover.svg';
-import themeCover2 from '../images/themeCover.svg';
-import themeCover3 from '../images/themeCover.svg';
-import themeCover4 from '../images/themeCover.svg';
-import themeCover5 from '../images/themeCover.svg';
-import React from "react";
+import kitsch from '../images/kitsch1.jpeg';
+import nature from '../images/nature1.jpeg';
+import cat from '../images/cat1.jpeg';
+import black from '../images/black1.jpeg';
+import pattern from '../images/pattern1.jpeg';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { firestore } from '../firebase';
+import { getAuth,onAuthStateChanged } from 'firebase/auth';
 
 function Edit(props) {
-    // const [selectedTheme, setSelectedTheme]= useState();
-    // const [selectedPhoto, setSelectedPhoto] = useState([]);
 
-    // const handleSelectedTheme=(e)=>{
-    //     setSelectedTheme(e.target.value)
-    //     console.log(e.target.value)
-    // }
-    // const handleSelectedPhoto=(e)=>{
-    //     let include = selectedPhoto.includes(e.target.value);
-    //     console.log(include)
-    //     if(!include){
-    //         setSelectedPhoto(selectedPhoto.concat(e.target.value));
-    //     }else{
-    //         const filtered = selectedPhoto.filter((filter)=>filter!==e.target.value)
-    //         setSelectedPhoto(filtered)
-    //     }
-    // }
 
-    const themeList=[{name:"themeCover1", img:themeCover1},
-                {name:"themeCover2", img:themeCover2},
-                {name:"themeCover3", img:themeCover3},
-                {name:"themeCover4", img:themeCover4},
-                {name:"themeCover5", img:themeCover5}];
+    const themeList=[{name:"kitsch", img:kitsch},
+                {name:"nature", img:nature},
+                {name:"cat", img:cat},
+                {name:"black", img:black},
+                {name:"pattern", img:pattern}];
 
-    const photoList=[{name:"photo1", img:frame},
-                {name:"photo2", img:frame},
-                {name:"photo3", img:frame},
-                {name:"photo4", img:frame},
-                {name:"photo5", img:frame}];
+
+                    const auth = getAuth();
+                    const [user,setUser] = useState();
+                    let userImageList=[]
+                    // const [userImageList,setUserImageList]=useState([]);
+                    const [imgUrlList, setImgUrlList] = useState([]);
+                    let oldImgUrlList=[]
+                    useEffect(()=>{
+                        onAuthStateChanged(auth, (user) => {
+                            if (user) {
+                                setUser(user);
+                                const users = firestore.collection("user");
+                                const userEmail = user.email;
+                            
+                                users.doc(userEmail).get().then((doc) => {
+                                    userImageList = doc.data().image;
+                                // userImageList = image;
+                              console.log(userImageList)
+
+                              for(let i=0; i<userImageList.length; i++){
+                                
+                                let userImage = userImageList[i];
+                                console.log(userImage);
+                                const image = firestore.collection('image');
+                                
+                                image.doc(userImage).get().then((document)=>{
+                                    const imageInfo = document.data();
+                                console.log(imgUrlList)
+                                  
+                                    console.log(imageInfo.imgUrl)
+                                    var imgUrl = imageInfo.imgUrl;
+                                    if(!oldImgUrlList.includes(imgUrl)){
+                                        oldImgUrlList = [...oldImgUrlList,imgUrl]
+                                    setImgUrlList(oldImgUrlList)
+                                    }
+                         
+                            })
+                            }
+
+                            });
+
+                            
+                            } else {
+                                    }
+                            });
+                    },[]);
+
+
+
+                
+
+    // const photoList=[{name:"photo1", img:frame},
+    //             {name:"photo2", img:frame},
+    //             {name:"photo3", img:frame},
+    //             {name:"photo4", img:frame},
+    //             {name:"photo5", img:frame}];
 
   return (
     <Container>
@@ -62,11 +90,11 @@ function Edit(props) {
                 ))}
             </ThemeContainer>
             <PhotoContainer>
-            {photoList.map(photo=>(
+            {imgUrlList.map(url=>(
                     <label>
-                        <ThemeRadio type="radio" checked={props.selectedPhoto.indexOf(photo.name)!=-1} value={photo.name} onClick={props.handleSelectedPhoto}/>
+                        <ThemeRadio type="radio" checked={props.selectedPhoto.indexOf(url)!=-1} value={url} onChange={props.handleSelectedPhoto}/>
                         <PhotoBox>
-                            <Photo src={photo.img}/>
+                            <Photo src={url}/>
                         </PhotoBox>
                     </label>
                 ))}
@@ -130,10 +158,14 @@ const ThemeBox = styled.div`
 `
 const Theme = styled.img`
     width:150px;
+    height:220px;
     margin:10px;
     box-sizing: border-box;
+    object-fit:cover;
+    border:1px solid black;
     @media Screen and (max-width:600px){
         width:90px;
+        height:130px;
         margin:0px;
         padding:5px;
     }
@@ -167,10 +199,14 @@ const PhotoBox = styled.div`
 `
 const Photo = styled.img`
     width:150px;
+    height:220px;
     margin:10px;
     box-sizing: border-box;
+    object-fit:cover;
+    border:1px solid black;
     @media Screen and (max-width:600px){
         width:90px;
+        height:130px;
         margin:0px;
         padding:5px;
 
