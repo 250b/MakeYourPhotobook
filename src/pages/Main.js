@@ -67,13 +67,15 @@ onAuthStateChanged(auth, (user) => {
           const image = firestore.collection("image");
         image.doc(imageUpload.name).set({
             imgUrl: url,
-            creater:userEmail
+            creater:userEmail,
+            album:[]
           });
 
           const user = firestore.collection("user");
           user.doc(userEmail).get().then((doc) => {
           const userInfo = doc.data();
           const newList = [...userInfo.image, imageUpload.name];
+          console.log(newList);
           user.doc(userEmail).update({image:newList});
 
           setImageUpload("");

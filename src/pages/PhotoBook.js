@@ -8,7 +8,11 @@ import frame2 from '../images/frame2.svg'
 import frame3 from '../images/frame3.svg'
 import Header from "../components/Header";
 import HTMLFlipBook from "react-pageflip";
-import polar from '../images/polaroid.svg'
+import { onAuthStateChanged, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {getStorage, ref, uploadBytes, listAll, getDownloadURL,} from "firebase/storage";
+import { firestore ,firebaseApp,
+  firebaseDb,
+  firebaseStorage,} from '../firebase';
 
 function PhotoBook() {
     const location = useLocation();
@@ -16,9 +20,51 @@ function PhotoBook() {
     console.log(location.state.albumName.albumName);
     const [showMenu, setShowMenu] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
-   
-    const theme=["url('./theme1.svg')", "url('./theme2.svg')", "url('./theme1.svg')", "url('./theme2.svg')"];
-    const selectedImages = [frame2, frame3, frame2, frame3 ];
+
+    const themeList={
+      nature:["url('./nature1.jpeg')", "url('./nature2.jpeg')", "url('./nature3.jpeg')", "url('./nature4.jpeg')"],
+       cat:["url('./cat1.jpeg')", "url('./cat2.jpeg')", "url('./cat3.jpeg')"],
+       pattern:["url('./pattern1.jpeg')", "url('./pattern2.jpeg')", "url('./pattern3.png')", "url('./pattern4.jpeg')"],
+       black:["url('./black1.jpeg')", "url('./black2.jpeg')", "url('./black3.jpeg')", "url('./black4.jpeg')"],
+       kitsch:["url('./kitsch1.jpeg')", "url('./kitsch2.jpeg')", "url('./kitsch3.jpeg')", "url('./kitsch4.jpeg')"],
+  }
+
+
+    //유저 정보 확인해서 동일하고 이름도 동일한 앨범 가져오기
+    //앨범의 테마 가져와서 설정
+    const auth = getAuth();
+    let userEmail =""
+    let themeName=""
+    const [theme, setTheme] =useState([])
+    const [selectedImages, setSelectedImages] =useState([])
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userEmail = user.email
+        console.log(userEmail)
+      } else {
+      }
+    });
+    console.log(userEmail)
+    const album = firestore.collection("album");
+    album.doc(albumName).get().then((document)=>{
+      const albumInfo = document.data();
+      if(albumInfo.creater=userEmail){
+        themeName=albumInfo.theme
+        console.log(themeName)
+        console.log(themeList[themeName])
+        setTheme(themeList[themeName])
+        setSelectedImages(albumInfo.image)
+
+      }
+})
+// setTheme(themeList[themeName])
+useEffect(()=>{
+  // setTheme(themeList[themeName])
+  console.log(themeList[themeName])
+},[themeName])
+
+console.log(theme)
+    // const selectedImages = [frame2, frame3, frame2, frame3 ];
 
     const toshowMenu = ()=>{
         setShowMenu(true)
@@ -35,13 +81,10 @@ function PhotoBook() {
   }
 
   const Pages=(theme, selectedImages)=>{
-    console.log(theme);
-    console.log(selectedImages);
      const result=[];
       for(let i=0; i< selectedImages.length; i++){
         result.push(<Page theme={theme[i%theme.length]}><Image src={selectedImages[i]}/></Page>)
       }
-      console.log(result);
       return result;
   }
   
@@ -128,7 +171,6 @@ const Image = styled.img`
   height:450px;
   margin-top:30px;
   object-fil:cover;
-  border:2px solid black;
   @media Screen and (max-width:1000px){
       width:270px;
       height:360px;

@@ -29,7 +29,7 @@ function Edit(props) {
                     useEffect(()=>{
                         onAuthStateChanged(auth, (user) => {
                             if (user) {
-                                setUser(user);
+                                // setUser(user);
                                 const users = firestore.collection("user");
                                 const userEmail = user.email;
                             

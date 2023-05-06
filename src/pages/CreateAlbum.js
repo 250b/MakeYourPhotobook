@@ -62,13 +62,16 @@ function CreateAlbum() {
                 const userInfo = doc.data();
             const newList = [...userInfo.album, title];
             console.log(newList);
-            user.doc(userEmail).set({email: userEmail, album: newList});
+            user.doc(userEmail).set({email: userEmail, album: newList, image: userInfo.image});
             })
             
             const album = firestore.collection("album");
             console.log(title);
-            album.doc(title).set({title:title, theme:selectedTheme, creater:userEmail})
+            album.doc(title).set({title:title, theme:selectedTheme, creater:userEmail, image:selectedPhoto})
 
+            const image = firestore.collection("image"); 
+            console.log(selectedPhoto[0])   
+            console.log("?")
             navigate('/myalbum')
         }catch(error){
             console.log(error)

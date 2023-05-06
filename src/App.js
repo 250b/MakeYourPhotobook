@@ -1,28 +1,36 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter, Route, Routes, Router } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Router, Redirect, Navigate} from 'react-router-dom';
 import Start from './pages/Start';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import MyAlbum from './pages/MyAlbum';
 import PhotoBook from './pages/PhotoBook';
 import CreateAlbum from './pages/CreateAlbum';
+import { useEffect, useState } from 'react';
+import {  getAuth,onAuthStateChanged } from 'firebase/auth';
+import AppRouter from './AppRouter'
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth,(user) => {
+      console.log(user)
+      if(user){
+        setIsLoggedIn(true);
+        console.log(isLoggedIn)
+      } else {
+        setIsLoggedIn(false);
+        console.log(isLoggedIn)
+      }
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Start/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/main' element ={<Main/>}/>
-          <Route path='/myalbum' element ={<MyAlbum/>}/>
-          <Route path='/album' element ={<PhotoBook/>}/>
-          <Route path='/createAlbum' element ={<CreateAlbum/>}/>
-        </Routes>
-      </BrowserRouter>
-      
-      
+    <div>
+      <AppRouter isLoggedIn={isLoggedIn}/>
     </div>
   );
 }

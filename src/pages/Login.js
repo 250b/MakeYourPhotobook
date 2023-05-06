@@ -16,6 +16,8 @@ function Login() {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPw, setLoginPw] = useState("");
     const [login, setLogin] = useState(true);
+    const auth = getAuth();
+              console.log(auth);
 
     const toMain = async () => {
             try {
@@ -87,7 +89,7 @@ function Login() {
 
             const userInfo = firestore.collection("user");
 
-            userInfo.doc(user.email).set({email: user.email, album: []});
+            userInfo.doc(user.email).set({email: user.email, album: [], image:[]});
 
           } catch (error) {
             alert(error);
