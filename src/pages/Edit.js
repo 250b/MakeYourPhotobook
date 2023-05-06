@@ -116,6 +116,9 @@ const Container = styled.div`
     @media Screen and (max-width:1300px){
         width:calc(100vw - 0px);
     }
+    @media Screen and (max-width:600px){
+        padding-top:50px;
+    }
 
     >span{
         font-size:25px;
@@ -129,7 +132,7 @@ const ThemeContainer = styled.div`
     justify-content:center;
     display:grid;
     grid-template-columns:repeat(5, 1fr);
-    margin: auto;
+    margin:0px auto;
     margin-bottom:20px;
     border:2px solid black;
     padding:20px;
