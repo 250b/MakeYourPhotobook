@@ -1,29 +1,40 @@
 import styled from "styled-components";
 import React from "react";
 import CustomButton from "../components/CustomButton"
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import star from '../images/star.png'
+import { getAuth , signOut} from 'firebase/auth';
 
 function Menu(props) {
     let navigate = useNavigate();
 
     const toMyAlbum =()=>{
-        navigate('/myalbum')
+      navigate('/myalbum')
     }
     const toMain =()=>{
       navigate('/main')
   }
 
+  const logout = async () => {
+
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
-      
         <ContentContainer>
             <Icon className="star" src={star} onClick={props.onclick}/>
             <div className="div"></div>
             <MenuList onClick={toMain}>HOME</MenuList>
             <MenuList onClick={toMyAlbum}>My ALBUM</MenuList>
             <MenuList>ACCOUNT</MenuList>
-            <MenuList>LOGOUT</MenuList>
+            <MenuList onClick={logout}>LOGOUT</MenuList>
         </ContentContainer>
     </Container>
   );
