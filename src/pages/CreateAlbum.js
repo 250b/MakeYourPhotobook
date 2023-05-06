@@ -44,6 +44,9 @@ function CreateAlbum() {
     }
 
     const onTitleChange=(event)=>{
+        
+            event.target.value =  event.target.value.replace(/[^a-zA-Z0-9]/g, '');
+          
         setTitle(event.target.value)
     }
 
@@ -56,24 +59,31 @@ function CreateAlbum() {
 }
     const toCreate=()=>{
         try{
+
             const user = firestore.collection("user");
+    
 
             user.doc(userEmail).get().then((doc) => {
                 const userInfo = doc.data();
-            const newList = [...userInfo.album, title];
-            console.log(newList);
-            user.doc(userEmail).set({email: userEmail, album: newList, image: userInfo.image});
-            })
-            
-            const album = firestore.collection("album");
+                console.log(!title);
+                if(!userInfo.album.includes(title)&&title&&selectedTheme&&selectedPhoto){
+                    const newList = [...userInfo.album, title];
+                // console.log(newList);
+                user.doc(userEmail).set({email: userEmail, album: newList, image: userInfo.image});
+
+
+                const album = firestore.collection("album");
             console.log(title);
             album.doc(title).set({title:title, theme:selectedTheme, creater:userEmail, image:selectedPhoto})
 
             const image = firestore.collection("image"); 
             console.log(selectedPhoto[0])   
             console.log("?")
-            navigate('/myalbum')
-        }catch(error){
+            navigate('/myalbum')}else{
+                alert("please check")
+            }
+                })}
+           catch(error){
             console.log(error)
         }
 
@@ -86,7 +96,7 @@ function CreateAlbum() {
             <HeaderContainer>
                 <Header starOnclick={toshowMenu} leftButton={"create"} leftButtonOnclick={toCreate}></Header>
                 <TitleContainer>
-                    <Input placeholder={"TITLE"} onChange={onTitleChange} value={title}/>
+                    <Input placeholder={"TITLE"} onChange={onTitleChange} value={title} maxLength="6"/>
                 </TitleContainer>
             </HeaderContainer>
             <Edit handleSelectedTheme={handleSelectedTheme} handleSelectedPhoto={handleSelectedPhoto} selectedTheme={selectedTheme} selectedPhoto={selectedPhoto}/>
