@@ -107,7 +107,7 @@ onAuthStateChanged(auth, (user) => {
                 <Frame src={frame} onClick={imgInput}/>
                 <input type="file" accept="image/jpg, image/jpeg, image/png" ref={photoInput} onChange={onUploadImage} style={{display: "none"}}/>
                 <InputContainer>
-                    <Input/>
+                    <Input placeholder="위 아이콘을 눌러 사진을 등록하거나 링크를 입력해주세요"/>
                     <Button>GO!</Button>
                 </InputContainer>
                 <Title>PHOTOBOOK</Title>
@@ -170,6 +170,7 @@ const InputContainer = styled.div`
     width:300px;}
 `
 const Input  =styled.input`
+  font-size:15px;
   font-family: goblin;
   width:700px;
   height:30px;
