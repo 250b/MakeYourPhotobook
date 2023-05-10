@@ -8,7 +8,7 @@
 
 ## 개발 환경 (Development Environment)
 -  React
--  Firebase - Firestore
+-  Firebase - authentication / firestore / storage
 - npm - v8.1.0
 - node - v16.13.0
 
