@@ -11,6 +11,7 @@
 -  Firebase - authentication / firestore / storage
 - npm - v8.1.0
 - node - v16.13.0
+- Google Chrome
 
 
 ## 실행 방법 (Set Up)
