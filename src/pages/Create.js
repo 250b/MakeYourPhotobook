@@ -93,7 +93,7 @@ const Container = styled.div`
         width:calc(100vw - 0px);
     }
     @media Screen and (max-width:600px){
-        padding-top:50px;
+        padding-top:100px;
     }
     >span{
         font-size:25px;
