@@ -188,7 +188,7 @@ const Photo = styled.img`
 height:216px;
 object-fit:cover;
 @media Screen and (max-width:600px){
-    height:130px;
+    height:125px;
 }
 
 `
