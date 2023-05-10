@@ -15,40 +15,39 @@ function MyAlbum() {
     const [album, setAlbum] = useState([]);
 
 
-
+//유저가 생성한 앨범 정보 가져오기
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-
         const userEmail = user.email;
         const users = firestore.collection("user");
-        // collection의 document인 "bucket_item"을 가져온다.
         users.doc(userEmail).get().then((doc) => {
           const userInfo = doc.data();
           setAlbum(userInfo.album);
-          // console.log(album)
         })
-
       } else {
-    
       }
     });
 
-
+    //메뉴 열기
     const toshowMenu = ()=>{
       setShowMenu(true)
-  }
+    }
+  //메뉴 닫기
     const tocloseMenu = ()=>{
       setShowMenu(false)
-  }
+    }
+  // 클릭된 앨범으로 이동
   const toMoveAlbum = (albumName)=>{
-    navigate("/album", {state:{albumName:{albumName}}});
-}
-const toMoveCreate = ()=>{
-  navigate("/createAlbum");
-}
+    navigate("/album", {state:{albumName:{albumName}}});//포토북에 띄울 앨범 이름 전달
+  }
 
+  //+버튼으로 앨범 생성 페이지 이동
+  const toMoveCreate = ()=>{
+    navigate("/createAlbum");
+  }
 
+//앨범 컴포넌트
 const Albums=(album)=>{
   if(album.album!=undefined){
     return(
@@ -95,7 +94,6 @@ const AlbumContainer = styled.div`
     margin:auto;
     margin-top:40px;
     padding-top:110px;
-    // border:1px solid black;
     @media Screen and (max-width:900px){
         grid-template-columns:repeat(2, 1fr);
     }
