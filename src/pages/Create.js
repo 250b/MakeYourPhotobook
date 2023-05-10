@@ -119,8 +119,10 @@ const ThemeContainer = styled.div`
     }
     label>input[type=radio]:checked + div{
         border:2px solid black;
-        box-sizing: border-box;
-    }
+        // box-sizing: border-box;
+        @media Screen and (max-width:600px){
+            height:134px;
+        }
 `
 const ThemeRadio = styled.input`
     visibility:hidden;
