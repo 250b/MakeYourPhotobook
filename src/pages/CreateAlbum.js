@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import React from "react";
 import Menu from "./Menu";
 import { useState } from "react";
-import Edit from "./Edit";
+import Create from "./Create";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
@@ -15,24 +15,22 @@ function CreateAlbum() {
     const [userEmail, setUserEmail] = useState();
     const auth = getAuth();
 
+    //유저 정보
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserEmail(user.email)
-        // ...
       } else {
-    
       }
     });
-
-
 
     const [selectedTheme, setSelectedTheme]= useState();
     const [selectedPhoto, setSelectedPhoto] = useState([]);
 
+    //테마 선택
     const handleSelectedTheme=(e)=>{
         setSelectedTheme(e.target.value)
-        console.log(e.target.value)
     }
+    //이미지 선택
     const handleSelectedPhoto=(e)=>{
         let include = selectedPhoto.includes(e.target.value);
         if(!include){
@@ -43,44 +41,38 @@ function CreateAlbum() {
         }
     }
 
+    //제목 변경 시 
     const onTitleChange=(event)=>{
-        
-            event.target.value =  event.target.value.replace(/[^a-zA-Z0-9]/g, '');
-          
+            event.target.value =  event.target.value.replace(/[^a-zA-Z0-9.]/g, ''); //영어, . 만 가능
         setTitle(event.target.value)
     }
 
-
+    //메뉴 열기
     const toshowMenu = ()=>{
       setShowMenu(true)
-  }
-  const tocloseMenu = ()=>{
-    setShowMenu(false)
-}
+    }
+    //메뉴 닫기
+    const tocloseMenu = ()=>{
+        setShowMenu(false)
+    }
+
+    //create 버튼 기능 - 앨범 생성
     const toCreate=()=>{
         try{
-
             const user = firestore.collection("user");
-    
-
             user.doc(userEmail).get().then((doc) => {
                 const userInfo = doc.data();
-                console.log(!title);
-                if(!userInfo.album.includes(title)&&title&&selectedTheme&&selectedPhoto){
+                if(!userInfo.album.includes(title)&&title&&selectedTheme&&selectedPhoto){ // 모든 정보가 입력되어야 생성 가능
                     const newList = [...userInfo.album, title];
-                // console.log(newList);
-                user.doc(userEmail).set({email: userEmail, album: newList, image: userInfo.image});
+                user.doc(userEmail).set({email: userEmail, album: newList, image: userInfo.image}); //유저 정보에 새 앨범 추가
 
 
                 const album = firestore.collection("album");
-            console.log(title);
-            album.doc(title).set({title:title, theme:selectedTheme, creater:userEmail, image:selectedPhoto})
+            album.doc(title+userEmail).set({title:title, theme:selectedTheme, creater:userEmail, image:selectedPhoto}) //앨범 정보에 새 앨범 추가
 
-            const image = firestore.collection("image"); 
-            console.log(selectedPhoto[0])   
-            console.log("?")
-            navigate('/myalbum')}else{
-                alert("please check")
+            const image = firestore.collection("image");  
+            navigate('/myalbum')}else{ 
+                alert("모든 정보를 입력했는지 확인한 후 다시 시도하십시오")
             }
                 })}
            catch(error){
@@ -99,7 +91,7 @@ function CreateAlbum() {
                     <Input placeholder={"TITLE"} onChange={onTitleChange} value={title} maxLength="6"/>
                 </TitleContainer>
             </HeaderContainer>
-            <Edit handleSelectedTheme={handleSelectedTheme} handleSelectedPhoto={handleSelectedPhoto} selectedTheme={selectedTheme} selectedPhoto={selectedPhoto}/>
+            <Create handleSelectedTheme={handleSelectedTheme} handleSelectedPhoto={handleSelectedPhoto} selectedTheme={selectedTheme} selectedPhoto={selectedPhoto}/>
         </Container>
   );
 }
@@ -126,6 +118,9 @@ const TitleContainer = styled.div`
     .right{
         left:calc(50vw + 160px);
         top:10px;
+    }
+    input:focus{
+        outline:none;
     }
 `
 const Input = styled.input`
