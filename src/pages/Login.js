@@ -12,7 +12,7 @@ function Login() {
     const [signupEmail, setSignupEmail] = useState("");
     const [signupPw, setSignupPw] = useState("");
     const [signupPwCheck, setSignupPwCheck] = useState("");
-    const [signup, setSignup] = useState(false);
+    const [signup, setSignup] = useState(true);
 
     //로그인 input
     const [loginEmail, setLoginEmail] = useState("");
@@ -29,7 +29,7 @@ function Login() {
               const { stsTokenManager, uid } = user;
               navigate('/main');
             } catch (error) {
-              console.log(error);
+              alert(error);
             }
     }
 //로그인 input onchange
