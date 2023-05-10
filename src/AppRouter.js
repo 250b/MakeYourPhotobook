@@ -7,6 +7,7 @@ import Main from './pages/Main';
 import MyAlbum from './pages/MyAlbum';
 import PhotoBook from './pages/PhotoBook';
 import CreateAlbum from './pages/CreateAlbum';
+import { Navigate } from 'react-router-dom';
 
 
 function AppRouter({isLoggedIn}) {
@@ -15,13 +16,7 @@ function AppRouter({isLoggedIn}) {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Start/>}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/main' element ={<Main/>}/>
-            <Route path='/myalbum' element ={<MyAlbum/>}/>
-            <Route path='/album' element ={<PhotoBook/>}/>
-            <Route path='/createAlbum' element ={<CreateAlbum/>}/>
-          {/* {isLoggedIn?
+          {isLoggedIn?
           <>
             <Route path="/" element={<Start/>}/>
             <Route path='/login' element={<Login/>}/>
@@ -35,7 +30,7 @@ function AppRouter({isLoggedIn}) {
             <Route path='/login' element={<Login/>}/>
             <Route path="*" element={<Navigate to ="/" />}/>
           </>
-        } */}
+        }
         </Routes>
       </BrowserRouter>
       
