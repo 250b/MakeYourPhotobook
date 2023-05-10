@@ -206,7 +206,7 @@ height:216px;
 box-sizing: border-box;
 object-fit:cover;
 @media Screen and (max-width:600px){
-    height:128px;
+    height:125px;
     margin:0px;
 }
 `
