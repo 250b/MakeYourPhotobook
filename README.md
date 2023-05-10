@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# MAKE YOUR PHOTOBOOK 📸
+소프트웨어학부 20213038 이보현 - [웹클라이언트컴퓨팅] 중간대체 과제물
+## 프로젝트 소개 (Introduction)
+- MAKE YOUR PHOTOBOOK은 온라인 포토북 제작 서비스입니다.
+업로드 한 사진을 다양한 테마의 포토북으로 만들어 보관할 수 있습니다.
+- 시연 영상: https://youtu.be/6QAoc_wHNjY
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 개발 환경 (Development Environment)
+-  React
+-  Firebase - Firestore
+- npm - v8.1.0
+- node - v16.13.0
 
-In the project directory, you can run:
 
-### `npm start`
+## 실행 방법 (Set Up)
+1.  해당 repository clone 후 이동
+2. 터미널에 `npm install`을 입력해 패키지 설치
+3.  `npm start`를 통해 실행
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 기능 (Features)
+[2023.5.10 기준]
+- 제공 기능
+  * 회원가입 / 로그인
+  * 이미지 업로드 (button)
+  * 메뉴
+  * 앨범 생성 기능
+  * 포토북 
+- 제한 기능
+  * 유저 정보 변경 (account menu)
+  * 이미지 업로드 (url)
+  * 포토북 수정 (photobook save button)
+  * 포토북 삭제 (photobook delete button)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## 유의사항 (Precautions)
+- 모든 기능은 로그인 이후 사용 가능
+- 해당 포토북은 셀프 사진부스의 원본 사진 사이즈를 기준으로 함
+- 앨범 이름에는 영어 및  ' . ' 만 사용 가능하며, 6자 이내로 제한
+- 이미지 형식 'jpg' '.jpeg' '.png' 지원
+- 이미지 업로드 시,다중 업로드를 막기 위해 완료 alert가 뜰 때까지 대기
+- 한 계정 내 동일한 이름의 이미지 업로드 지양 (중복으로 인한 오류가 발생할 수 있음)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 스크린샷 (Screenshot)
+<div>
+<img width="200" alt="start" src="https://github.com/250b/MakeYourPhotobook/assets/84188904/8e587776-4bf8-4af4-b683-2662b0c7d704">
+<img width="200" alt="signup/login" src="https://github.com/250b/MakeYourPhotobook/assets/84188904/d1191d11-e9c1-45f3-8eb2-19b6d8317d8c">
+<img width="200" alt="main" src="https://github.com/250b/MakeYourPhotobook/assets/84188904/524a28ba-e62c-4eb8-9524-9337ba41aa00">
+<img width="200" alt=“menu” src="https://github.com/250b/MakeYourPhotobook/assets/84188904/5a6e3a8a-360d-45e1-bc94-6bfe27acc0f1">
+<div>
+<div/>
+<img width="200" alt="myalbum" src="https://github.com/250b/MakeYourPhotobook/assets/84188904/5134fa06-5da9-45d8-ad30-0b7a0503bb99">
+<img width="200" alt=“create” src="https://github.com/250b/MakeYourPhotobook/assets/84188904/fb110521-e825-47a5-90cc-9cdb394e4835">
+<img width="200" alt=“photo”book src="https://github.com/250b/MakeYourPhotobook/assets/84188904/3046bb6f-8563-439c-9be7-1a98e42ed785">
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
