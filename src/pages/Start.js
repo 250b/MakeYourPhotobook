@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Start() {
   let navigate = useNavigate();
 
+  //로그인 페이지로 이동
   const toLogin =() =>{
     navigate("/login");
   }
