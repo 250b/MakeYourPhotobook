@@ -11,7 +11,6 @@
 -  Firebase - authentication / firestore / storage
 - npm - v8.1.0
 - node - v16.13.0
-- Google Chrome
 
 
 ## 실행 방법 (Set Up)
@@ -43,7 +42,7 @@
 - 이미지 업로드 시, 다중 업로드를 막기 위해 완료 alert가 뜰 때까지 대기
 - 한 계정 내 동일한 이름의 이미지 업로드 지양 (중복으로 인한 오류가 발생할 수 있음)
 - iPhoneSE까지 반응형 지원
-
+- 확인된 서비스 지원 가능 브라우저: Google Chrome, Safari / 추천 환경: Google Chrome
 
 ## 스크린샷 (Screenshot)
 <div>
