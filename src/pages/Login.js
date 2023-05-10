@@ -1,53 +1,52 @@
 import styled from "styled-components";
 import CustomButton from "../components/CustomButton"
 import { useNavigate } from "react-router-dom";
- import React, { useEffect, useState } from "react";
+ import React, { useState } from "react";
  import { firestore } from '../firebase';
  import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 function Login() {
     let navigate = useNavigate();
+    //회원가입 input
     const [signupEmail, setSignupEmail] = useState("");
     const [signupPw, setSignupPw] = useState("");
     const [signupPwCheck, setSignupPwCheck] = useState("");
-    const [signup, setSignup] = useState(true);
+    const [signup, setSignup] = useState(false);
 
+    //로그인 input
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPw, setLoginPw] = useState("");
     const [login, setLogin] = useState(true);
     const auth = getAuth();
-              console.log(auth);
 
+
+    //로그인
     const toMain = async () => {
             try {
               const auth = getAuth();
-              console.log(auth);
               const { user } = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
-              console.log(user);
               const { stsTokenManager, uid } = user;
               navigate('/main');
-            //   setAuthInfo({ uid, email, authToken: stsTokenManager });
             } catch (error) {
               console.log(error);
             }
     }
-
-
+//로그인 input onchange
     const onLoginChange=(event)=>{
         const {
             target: { name, value }
           } = event
           if (name === 'email') {
               setLoginEmail(value);
-              if((value!="" && loginPw!="")){
+              if((value!="" && loginPw!="")){ //로그인 버튼 활성화
                 setLogin(false);
               }else{
                 setLogin(true);
               }
           } else if (name === 'pw') {
               setLoginPw(value);
-              if(loginEmail!="" && value!=""){
+              if(loginEmail!="" && value!=""){//로그인 버튼 활성화
                 setLogin(false);
               }else{
                 setLogin(true);
@@ -55,20 +54,21 @@ function Login() {
           }
     }
 
+   //회원가입 input onchange
     const onSignupChange = (event) => {
         const {
           target: { name, value }
         } = event
         if (name === 'email') {
             setSignupEmail(value);
-            if((signupPw===signupPwCheck) && (value!="")){
+            if((signupPw===signupPwCheck) && (value!="")){//회원가입 버튼 활성화
                 setSignup(false);
             }else{
                 setSignup(true);
             }
         } else if (name === 'pw') {
             setSignupPw(value);
-            if((value===signupPwCheck) && (signupEmail!="")){
+            if((value===signupPwCheck) && (signupEmail!="")){//회원가입 버튼 활성화
                 setSignup(false);
             }else{
                 setSignup(true);
@@ -82,6 +82,7 @@ function Login() {
             }
         }};
 
+        //회원가입
         const joinWithVerification = async (email, pw) => {
         try {
             const auth = getAuth();
@@ -91,6 +92,7 @@ function Login() {
 
             userInfo.doc(user.email).set({email: user.email, album: [], image:[]});
 
+            alert("회원가입 완료");
           } catch (error) {
             alert(error);
           }
