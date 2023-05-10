@@ -1,22 +1,30 @@
 import styled from "styled-components";
 import React from "react";
-import CustomButton from "../components/CustomButton"
-import { redirect, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import star from '../images/star.png'
 import { getAuth , signOut} from 'firebase/auth';
 
 function Menu(props) {
     let navigate = useNavigate();
 
+    //myalbum
     const toMyAlbum =()=>{
+      if(window.location.pathname=='/myalbum'){ //현재 페이지와 동일할 경우 redirect (메뉴바 꺼짐)
+        window.location.replace("/myalbum") 
+      }
       navigate('/myalbum')
     }
+
+    //home
     const toMain =()=>{
+      if(window.location.pathname=='/main'){//현재 페이지와 동일할 경우 redirect (메뉴바 꺼짐)
+        window.location.replace("/main")
+      }
       navigate('/main')
   }
 
+  //logout
   const logout = async () => {
-
     try {
       const auth = getAuth();
       await signOut(auth);
